@@ -53,7 +53,7 @@ products.forEach((product) => {
   `;
   //data is a property
 });
-
+///
 document.querySelector('.js-products-grid').innerHTML = productHTML;
 document.querySelectorAll('.js-add-to-cart').forEach((button)=>
   {
