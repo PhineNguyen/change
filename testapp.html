@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ứng dụng học toán</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background-color: #f3f4f6;
+      padding: 20px;
+    }
+    .question {
+      font-size: 24px;
+      margin: 20px;
+    }
+    .options {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 18px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      background-color: #4caf50;
+      color: white;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+    .result {
+      margin-top: 20px;
+      font-size: 20px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>Ứng dụng học toán</h1>
+  <div class="question" id="question">Câu hỏi: </div>
+  <div class="options" id="options"></div>
+  <div class="result" id="result"></div>
+
+  <script>
+    // Khởi tạo câu hỏi
+    function generateQuestion() {
+      const num1 = Math.floor(Math.random() * 10) + 1; // Số thứ nhất (1-10)
+      const num2 = Math.floor(Math.random() * 10) + 1; // Số thứ hai (1-10)
+      const correctAnswer = num1 + num2;
+
+      // Hiển thị câu hỏi
+      document.getElementById("question").innerText = `Câu hỏi: ${num1} + ${num2} = ?`;
+
+      // Tạo danh sách đáp án
+      const optionsContainer = document.getElementById("options");
+      optionsContainer.innerHTML = ""; // Xóa đáp án cũ
+      const answers = generateAnswers(correctAnswer);
+
+      // Tạo các nút đáp án
+      answers.forEach(answer => {
+        const button = document.createElement("button");
+        button.innerText = answer;
+        button.onclick = () => checkAnswer(answer, correctAnswer);
+        optionsContainer.appendChild(button);
+      });
+    }
+
+    // Tạo danh sách đáp án (bao gồm đáp án đúng và 2 đáp án sai)
+    function generateAnswers(correctAnswer) {
+      const answers = new Set();
+      answers.add(correctAnswer);
+      while (answers.size < 3) {
+        const wrongAnswer = correctAnswer + Math.floor(Math.random() * 5) - 2;
+        if (wrongAnswer > 0) answers.add(wrongAnswer);
+      }
+      return Array.from(answers).sort(() => Math.random() - 0.5);
+    }
+
+    // Kiểm tra đáp án
+    function checkAnswer(selected, correctAnswer) {
+      const resultDiv = document.getElementById("result");
+      if (selected === correctAnswer) {
+        resultDiv.innerText = "Đúng rồi! 🎉";
+        resultDiv.style.color = "green";
+      } else {
+        resultDiv.innerText = "Sai rồi! 😞";
+        resultDiv.style.color = "red";
+      }
+      setTimeout(generateQuestion, 2000); // Tạo câu hỏi mới sau 2 giây
+    }
+
+    // Bắt đầu ứng dụng
+    generateQuestion();
+  </script>
+</body>
+</html>
