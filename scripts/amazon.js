@@ -1,7 +1,7 @@
-
-
+const cart =[];
 let productHTML = '';
 products.forEach((product) => {
+  
   productHTML += `
     <div class="product-container">
       <div class="product-image-container">
@@ -60,24 +60,34 @@ document.querySelectorAll('.js-add-to-cart').forEach((button)=>
     button.addEventListener('click', ()=> {
       const productCart = button.dataset.productName;
       
-      let matchingitem=null;
+      let matchingitem;
       
       cart.forEach((item)=> { //if item already in cart array
         if(productCart === item.name){
           matchingitem = item;
         }
       });
+      cart.forEach((item) => { 
+    if (productCart === item.name) {
+        item.quantity += 1; // Cộng trực tiếp số lượng khi tìm thấy sản phẩm
+    }
+});
 
-        if(matchingitem){
-          matchingitem.quantity += 1;
-        }else{
-          cart.push({
-            name: productCart,
-            quantity: 1
-          });
-        }
-  
-    
-      console.log(cart);
+if (!cart.some((item) => productCart === item.name)) {
+    cart.push({
+        name: productCart,
+        quantity: 1
+    });
+}
+
+let cartQuantity = 0;
+cart.forEach((item) => {
+    cartQuantity += item.quantity;
+});
+
+document.querySelector('.js-cart-quantity').innerHTML = cartQuantity;
+console.log(cart);
+
+   
     });
 });
