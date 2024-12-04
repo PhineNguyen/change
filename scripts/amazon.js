@@ -1,5 +1,15 @@
-import {cart} from '../data/cart.js'
+import {cart, AddToCart} from '../data/cart.js'
 import { products } from '../data/products.js';
+
+/*have another syntax is suitable when you need many or all components from the module
+import * as cartModule from '../data/cart.js'
+
+cartModule.cart
+cartModule.AddToCart('id');
+
+
+
+*/
 let productHTML = '';
 products.forEach((product) => {
   
@@ -63,21 +73,7 @@ cart.forEach((item) => {
 document.querySelector('.js-cart-quantity').innerHTML = cartQuantity;
 
 }
-function AddToCart(productId) {
-  // Check if the product already exists in the cart
-  const existingItem = cart.find(item => item.productId === productId);
 
-  if (existingItem) {
-      // If found, increment the quantity
-      existingItem.quantity += 1;
-  } else {
-      // If not found, add a new item to the cart
-      cart.push({
-          productId: productId,
-          quantity: 1
-      });
-  }
-}
 ///
 document.querySelector('.js-products-grid').innerHTML = productHTML;
 document.querySelectorAll('.js-add-to-cart').forEach((button)=>
