@@ -1,0 +1,15 @@
+isArray(): Kiểm tra xem một giá trị có phải là mảng hay không.
+
+isUndefined(): Kiểm tra xem một giá trị có phải là undefined hay không.
+
+trim(): Loại bỏ khoảng trắng ở đầu và cuối chuỗi.
+
+debounce(): Giới hạn tần suất mà một hàm có thể được gọi.
+
+throttle(): Giới hạn tần suất mà một hàm có thể được gọi, với một khoảng thời gian giữa các lần gọi.
+
+clone(): Tạo một bản sao sâu của một đối tượng hoặc mảng.
+
+merge(): Gộp hai hoặc nhiều đối tượng thành một đối tượng duy nhất.
+
+format(): Định dạng một chuỗi hoặc giá trị theo một mẫu cụ thể.

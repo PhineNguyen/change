@@ -1,0 +1,5 @@
+radio Selector
+
+syntax:
+
+<input type="radio" name = "name1" >
