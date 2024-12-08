@@ -4,8 +4,7 @@ products.forEach((product) => {
   productsHTML += `
     <div class="product-container">
       <div class="product-image-container">
-        <img class="product-image"
-          src="${product.image}">
+        <img class="product-image" src="${product.image}">
       </div>
 
       <div class="product-name limit-text-to-2-lines">
@@ -25,7 +24,7 @@ products.forEach((product) => {
       </div>
 
       <div class="product-quantity-container">
-          <select class="js-quantity-selector-${product.id}">
+        <select class="js-quantity-selector-${product.id}">
           <option selected value="1">1</option>
           <option value="2">2</option>
           <option value="3">3</option>
@@ -41,13 +40,13 @@ products.forEach((product) => {
 
       <div class="product-spacer"></div>
 
-      <div class="added-to-cart">
+      <div class="added-to-cart js-added-to-cart-${product.id}">
         <img src="images/icons/checkmark.png">
         Added
       </div>
 
       <button class="add-to-cart-button button-primary js-add-to-cart"
-      data-product-id="${product.id}">
+        data-product-id="${product.id}">
         Add to Cart
       </button>
     </div>
@@ -56,50 +55,55 @@ products.forEach((product) => {
 
 document.querySelector('.js-products-grid').innerHTML = productsHTML;
 
-document.querySelectorAll('.js-add-to-cart')
-  .forEach((button) => {
-    button.addEventListener('click', () => {
-      //const productId = button.dataset.productId; ->dễ hiểu khi chỉ cần truy cập 1 phần tử duy nhất
-      const {productId} = button.dataset;
-      let matchingItem;
+const addedMessageTimeouts = {};  // Để lưu trữ timeoutId cho từng sản phẩm
 
-      cart.forEach((item) => {
-        if (productId === item.productId) {
-          matchingItem = item;
-        }
-      });
-      const quantitySelector= document.querySelector(
-        `.js-quantity-selector-${productId}`);
-      
-   
+document.querySelectorAll('.js-add-to-cart').forEach((button) => {
+  button.addEventListener('click', () => {
+    const { productId } = button.dataset;
+    const quantitySelector = document.querySelector(`.js-quantity-selector-${productId}`);
+    const addedMessage = document.querySelector(`.js-added-to-cart-${productId}`);
+    const selectedQuantity = parseInt(quantitySelector.value, 10);
 
+    let matchingItem = null;
 
-   //syntax
-   //value được dùng để lấy giá trị của một phần tử <select> trong HTML
-      const selectedQuantity = parseInt(quantitySelector.value,10);
-
-     
-      if (matchingItem) {
-        matchingItem.quantity += selectedQuantity;
-      } else {
-        // cart.push({
-        //   productId: productId,
-        //   quantity: selectedQuantity
-        // });
-        
-        //productId có thuộc tính cùng tên nên không cần phải ghi lại
-        //shorthand
-        const newItem = {productId, quantity: selectedQuantity};
-        cart.push(newItem);
+    // Duyệt qua mảng cart để tìm item phù hợp
+    cart.forEach((item) => {
+      if (item.productId === productId) {
+        matchingItem = item;
       }
-
-      let cartQuantity = 0;
-
-      cart.forEach((item) => {
-        cartQuantity += item.quantity;
-      });
-     
-      document.querySelector('.js-cart-quantity')
-        .innerHTML = cartQuantity;
     });
+
+    if (matchingItem) {
+      matchingItem.quantity += selectedQuantity; // Nếu sản phẩm đã có trong giỏ, cộng thêm số lượng
+    } else {
+      const newItem = { productId, quantity: selectedQuantity };
+      cart.push(newItem);
+    }
+
+    // Tính tổng số lượng sản phẩm trong giỏ
+    let cartQuantity = 0;
+    cart.forEach((item) => {
+      cartQuantity += item.quantity;
+    });
+
+    // Cập nhật số lượng giỏ hàng
+    document.querySelector('.js-cart-quantity').innerHTML = cartQuantity;
+
+  
+    const previousTimeoutId = addedMessageTimeouts[productId];
+    if (previousTimeoutId) {
+      clearTimeout(previousTimeoutId);
+    }
+
+    
+    addedMessage.classList.add('add-to-cart-visible');
+
+    
+    const timeoutId = setTimeout(() => {
+      addedMessage.classList.remove('add-to-cart-visible');
+    }, 2000);
+
+   
+    addedMessageTimeouts[productId] = timeoutId;
   });
+});
