@@ -3,3 +3,16 @@ radio Selector
 syntax:
 
 <input type="radio" name = "name1" >
+
+
+
+syntax: 
+
+parseInt(string, radix)
+
+trong đó string là chuỗi cần chuyển đổi, radix là hệ số
+
+radix là hệ cơ số cần chuyển đổi. VD: 
+10 cho hệ thập phân (decimal)
+2 cho hệ nhi phân (binary)
+16 cho hệ thập lục nhị phân (hexadecimal)
