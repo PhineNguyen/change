@@ -656,5 +656,32 @@ const products = [
       "apparel",
       "mens"
     ]
-  }
+  },{
+    id:"id1",
+    image:"images/products/geforce-ada-4090-web-og-1200x630.jpg",
+    name:"RTX 4090",
+    rating:{
+      stars: 5,
+      count: 200
+    }, 
+    priceCents:100000,
+    keywords:[
+      "R",
+      "RTX",
+      "GPU"
+    ]
+  },{
+    id:"id2",
+    image:"images/products/z6109737154376_7aefd28d0f4db1f7bcbf5dda592a2ede.jpg",
+    name:"J97",
+    rating:{
+      stars: 1,
+      count: 1
+    },
+      priceCents:120,
+      keywords:[
+        "bocon",
+        "thienan"
+      ]
+    }
 ];

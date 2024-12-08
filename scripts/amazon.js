@@ -59,8 +59,8 @@ document.querySelector('.js-products-grid').innerHTML = productsHTML;
 document.querySelectorAll('.js-add-to-cart')
   .forEach((button) => {
     button.addEventListener('click', () => {
-      const productId = button.dataset.productId;
-
+      //const productId = button.dataset.productId; ->dễ hiểu khi chỉ cần truy cập 1 phần tử duy nhất
+      const {productId} = button.dataset;
       let matchingItem;
 
       cart.forEach((item) => {
@@ -82,10 +82,15 @@ document.querySelectorAll('.js-add-to-cart')
       if (matchingItem) {
         matchingItem.quantity += selectedQuantity;
       } else {
-        cart.push({
-          productId: productId,
-          quantity: selectedQuantity
-        });
+        // cart.push({
+        //   productId: productId,
+        //   quantity: selectedQuantity
+        // });
+        
+        //productId có thuộc tính cùng tên nên không cần phải ghi lại
+        //shorthand
+        const newItem = {productId, quantity: selectedQuantity};
+        cart.push(newItem);
       }
 
       let cartQuantity = 0;

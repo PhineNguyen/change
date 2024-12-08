@@ -16,3 +16,26 @@ radix là hệ cơ số cần chuyển đổi. VD:
 10 cho hệ thập phân (decimal)
 2 cho hệ nhi phân (binary)
 16 cho hệ thập lục nhị phân (hexadecimal)
+
+
+
+
+destructuring Syntax trong javascript 
+
+ cho phép trích xuất các giá trị từ mảng hoặc các thuộc tính
+ từ đối tượng và gán chúng vào các biến một cách ngắn gọn
+
+
+  for example:
+
+  const {property1, property2} = object;
+  Ý nghĩa:
+Gán giá trị của property1 và property2 trong đối tượng object vào các biến property1 và property2.
+
+const person = { name: "Alice", age: 25 };
+const { name, age } = person;
+console.log(name); // Alice
+console.log(age); // 25\
+ 
+ muốn biết chi tiết lên chat đọc
+ 
