@@ -17,6 +17,7 @@ export function AddToCart(productId) {
           quantity: 1
       });
  }
+ saveToStorage();
 } 
 export function removeFromCart(productId){
   const newCart=[];
@@ -27,4 +28,13 @@ export function removeFromCart(productId){
 });
 cart = newCart;
 
+saveToStorage();
+
 }
+
+
+
+
+
+
+
